@@ -12,10 +12,16 @@ class CountryScraper(object):
 	def scrape_country(self):
 		self.driver.get(link)
 		soup = BS(self.driver.page_source, 'html.parser')
-		writer = csv.DictWriter(open('where_sample.csv', 'w'), fieldnames = 'NAME CNTRYCDE CITY'.split(' '))
+		writer = csv.DictWriter(open('where_sample.csv', 'w'), fieldnames = 'name country'.split(' '))
 			for firm in soup.find_all('a', {'class':'company_search_result'}):
-				firm.get('title').split(' ',7)[7]
+				title = firm.get('title').split(' ',7)[7]
+				name  = title.split('(', 1)[0][1:-2]
+    			country = title.split('(',1)[1][0:8]
+    			dictionary = {'name': name, 'country': country}
+    			wirter.writerow(dictionary)
 		self.driver.close()
 
 	def scrape(self):
 		self.scrape_country()
+
+		#scrapethissite.com

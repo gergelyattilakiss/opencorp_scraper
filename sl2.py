@@ -1,4 +1,4 @@
 import opencorp_scraper as scraper
 
-sl1 = scraper.CountryScraper('sl','1')
-sl1.scrape()
+sl2 = scraper.CountryScraper('si','2')
+sl2.scrape()
